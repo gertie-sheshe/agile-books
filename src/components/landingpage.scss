@@ -13,9 +13,13 @@
         text-align: center;
     }
 
-    button {
+    button, a {
         font-family: 'Baloo Tamma 2', cursive;
         margin: 10px;
         border-radius: 8px;
+    }
+
+    a {
+        border: solid 1px black;
     }
 }

@@ -1,0 +1,45 @@
+.sections {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+
+    .section {
+        background-color: #e5e5e6;
+        margin: 20px 10px 10px 10px;
+        border-radius: 30px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+        .section-title, .section-description {
+            text-align: center
+        }
+
+        h3 {
+            margin: 0;
+            margin-top: 10px;
+        }
+    }
+
+    .section-to-read {
+        flex: 2
+    }
+    
+    .section-reading {
+        flex: 2
+    }
+    
+    .section-onhold {
+        flex: 2;
+    }
+    
+    .section-done {
+        flex: 2;
+    }
+    
+    .section-settings {
+        flex: 1.5;
+        border-radius: 0 50px 0 0;
+        background-color: #050507;
+    }
+
+}
+
