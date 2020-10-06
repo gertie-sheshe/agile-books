@@ -19,6 +19,18 @@
       height: 75vh;
       margin: 10px 10px 10px 10px;
       border-radius: 20px;
+      padding: 4px;
+      overflow: scroll;
+
+      .draggable {
+        background-color: white;
+        border-radius: 15px;
+        padding: 3px;
+        margin: 4px;
+        margin-bottom: 8px;
+        height: 300px;
+        overflow: scroll;
+      }
     }
 
     h3 {

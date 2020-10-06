@@ -1,40 +1,11 @@
 import React, { Component } from 'react';
+import { books } from './demo-data';
 import './demo.scss';
 
 class Demo extends Component {
   state = {
     title: 'Drag me',
-    books: [
-      {
-        id: 1,
-        title: 'The Secret Billionaire',
-        description:
-          '“The Secret Billionaire” is an intriguing young adult mystery/thriller',
-        author: 'Teymour Shahabi',
-      },
-      {
-        id: 2,
-        title:
-          '2084. Artifial Intelligence, The future of humanity, and the God question',
-        description:
-          'In 2084, scientist and philosopher John C. Lennox addresses the questions of where humanity is going in terms of technological enhancement, bioengineering',
-        author: 'John Lennox',
-      },
-      {
-        id: 3,
-        title: 'A Girl From Nowhere',
-        description:
-          'Surrounded by fire, a girl with mysterious powers and a young warrior search for safety.',
-        author: 'James Maxwell',
-      },
-      {
-        id: 4,
-        title: 'A World of Secrets',
-        description:
-          "Taimin and Selena must discover the truth about their world--before it's too late",
-        author: 'James Maxwell',
-      },
-    ],
+    books: books ? books : [],
   };
 
   onDragOver = (event) => {
@@ -53,12 +24,14 @@ class Demo extends Component {
   renderBooks = (books) => {
     return books.map((book) => (
       <div
+        className="draggable"
         key={book.id}
         id={book.id}
         draggable
         onDragStart={(event) => this.onDragStart(event)}
       >
-        <p>{book.title}</p>
+        <h4>Title: {book.title}</h4>
+        <p>Description: {book.description}</p>
       </div>
     ));
   };
@@ -79,7 +52,7 @@ class Demo extends Component {
             <div className="book-totals">
               <div>
                 <p>TOTAL</p>
-                <p>34</p>
+                <p>{this.state.books.length}</p>
               </div>
               <div>
                 <p>READING</p>
