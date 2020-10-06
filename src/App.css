@@ -7,8 +7,9 @@
 
 nav {
   background-color: #e5e5e6;
-  height: 50px;
+  height: 60px;
   font-size: x-large;
   font-weight: bolder;
   text-align: center;
+  padding: 10px;
 }

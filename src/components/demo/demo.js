@@ -4,23 +4,66 @@ import './demo.scss';
 class Demo extends Component {
   state = {
     title: 'Drag me',
+    books: [
+      {
+        id: 1,
+        title: 'The Secret Billionaire',
+        description:
+          '“The Secret Billionaire” is an intriguing young adult mystery/thriller',
+        author: 'Teymour Shahabi',
+      },
+      {
+        id: 2,
+        title:
+          '2084. Artifial Intelligence, The future of humanity, and the God question',
+        description:
+          'In 2084, scientist and philosopher John C. Lennox addresses the questions of where humanity is going in terms of technological enhancement, bioengineering',
+        author: 'John Lennox',
+      },
+      {
+        id: 3,
+        title: 'A Girl From Nowhere',
+        description:
+          'Surrounded by fire, a girl with mysterious powers and a young warrior search for safety.',
+        author: 'James Maxwell',
+      },
+      {
+        id: 4,
+        title: 'A World of Secrets',
+        description:
+          "Taimin and Selena must discover the truth about their world--before it's too late",
+        author: 'James Maxwell',
+      },
+    ],
   };
 
   onDragOver = (event) => {
-    console.log('OLAAA');
     event.preventDefault();
   };
 
-  onDragStart = (event, id) => {
-    console.log('WAUU', event, 'OLA', id);
-    event.dataTransfer.setData('id', id);
+  onDragStart = (event) => {
+    event.dataTransfer.setData('id', event.target.id);
   };
 
-  onDrop = (event) => {};
+  onDrop = (event) => {
+    let data = event.dataTransfer.getData('id');
+    event.target.appendChild(document.getElementById(data));
+  };
+
+  renderBooks = (books) => {
+    return books.map((book) => (
+      <div
+        key={book.id}
+        id={book.id}
+        draggable
+        onDragStart={(event) => this.onDragStart(event)}
+      >
+        <p>{book.title}</p>
+      </div>
+    ));
+  };
 
   render() {
-    let title = this.state.title;
-
     return (
       <div className="sections">
         <div className="section-settings">
@@ -54,13 +97,12 @@ class Demo extends Component {
             <h3>To Read</h3>
             <p>Pick your next title :) </p>
           </div>
-          <div className="body-section">
-            <div
-              draggable
-              onDragStart={(event) => this.onDragStart(event, title)}
-            >
-              <p>{title}</p>
-            </div>
+          <div
+            onDrop={(event) => this.onDrop(event)}
+            onDragOver={(e) => this.onDragOver(e)}
+            className="body-section"
+          >
+            {this.renderBooks(this.state.books)}
           </div>
         </div>
         <div className="section section-reading">
@@ -69,7 +111,7 @@ class Demo extends Component {
             <p>You are currently enjoying :)</p>
           </div>
           <div
-            onDrop={(event) => this.onDrop(event, 'reading')}
+            onDrop={(event) => this.onDrop(event)}
             onDragOver={(e) => this.onDragOver(e)}
             className="body-section"
           ></div>
@@ -79,14 +121,22 @@ class Demo extends Component {
             <h3>On Hold</h3>
             <p>Uh Oh, you did not like?</p>
           </div>
-          <div className="body-section"></div>
+          <div
+            onDrop={(event) => this.onDrop(event)}
+            onDragOver={(e) => this.onDragOver(e)}
+            className="body-section"
+          ></div>
         </div>
         <div className="section section-done">
           <div className="section-title">
             <h3>Done</h3>
             <p>One more book down!</p>
           </div>
-          <div className="body-section"></div>
+          <div
+            onDrop={(event) => this.onDrop(event)}
+            onDragOver={(e) => this.onDragOver(e)}
+            className="body-section"
+          ></div>
         </div>
       </div>
     );
