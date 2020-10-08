@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { books } from './demo-data';
+import BookDemo from '../book-demo/BookDemo';
+import SettingsDemo from '../settings-demo/SettingsDemo';
+import ColumnDemo from '../column-demo/ColumnDemo';
 import './demo.scss';
 
 class Demo extends Component {
@@ -23,93 +26,52 @@ class Demo extends Component {
 
   renderBooks = (books) => {
     return books.map((book) => (
-      <div
-        className="draggable"
-        key={book.id}
+      <BookDemo
         id={book.id}
-        draggable
-        onDragStart={(event) => this.onDragStart(event)}
-      >
-        <h4>Title: {book.title}</h4>
-        <p>Description: {book.description}</p>
-      </div>
+        title={book.title}
+        description={book.description}
+        onDragStart={this.onDragStart}
+      />
     ));
   };
 
   render() {
     return (
       <div className="sections">
-        <div className="section-settings">
-          <div className="image-section">
-            <img alt="user profile" src={require('./user.jpg')} />
-          </div>
-          <div className="user-description">
-            <p>Jane Doe</p>
-            <p>Author</p>
-          </div>
-          <div className="book-data">
-            <p>YOUR BOOKS</p>
-            <div className="book-totals">
-              <div>
-                <p>TOTAL</p>
-                <p>{this.state.books.length}</p>
-              </div>
-              <div>
-                <p>READING</p>
-                <p>24</p>
-              </div>
-              <div>
-                <p>DONE</p>
-                <p>10</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <SettingsDemo length={this.state.books.length} />
         <div className="section section-to-read">
-          <div className="section-title">
-            <h3>To Read</h3>
-            <p>Pick your next title :) </p>
-          </div>
-          <div
-            onDrop={(event) => this.onDrop(event)}
-            onDragOver={(e) => this.onDragOver(e)}
-            className="body-section"
-          >
-            {this.renderBooks(this.state.books)}
-          </div>
+          <ColumnDemo
+            books={this.state.books}
+            renderBooks={this.renderBooks}
+            title={`To Read`}
+            description={`Pick your next title :)`}
+            onDrop={this.onDrop}
+            onDragOver={this.onDragOver}
+          />
         </div>
         <div className="section section-reading">
-          <div className="section-title">
-            <h3>Reading</h3>
-            <p>You are currently enjoying :)</p>
-          </div>
-          <div
-            onDrop={(event) => this.onDrop(event)}
-            onDragOver={(e) => this.onDragOver(e)}
-            className="body-section"
-          ></div>
+          <ColumnDemo
+            title={`Reading`}
+            description={`You are currently enjoying :)`}
+            onDrop={this.onDrop}
+            onDragOver={this.onDragOver}
+          />
         </div>
         <div className="section section-onhold">
-          <div className="section-title">
-            <h3>On Hold</h3>
-            <p>Uh Oh, you did not like?</p>
-          </div>
-          <div
-            onDrop={(event) => this.onDrop(event)}
-            onDragOver={(e) => this.onDragOver(e)}
-            className="body-section"
-          ></div>
+          <ColumnDemo
+            title={`On Hold`}
+            description={`Uh Oh, you did not like?`}
+            onDrop={this.onDrop}
+            onDragOver={this.onDragOver}
+          />
         </div>
         <div className="section section-done">
-          <div className="section-title">
-            <h3>Done</h3>
-            <p>One more book down!</p>
-          </div>
-          <div
-            onDrop={(event) => this.onDrop(event)}
-            onDragOver={(e) => this.onDragOver(e)}
-            className="body-section"
-          ></div>
+          <ColumnDemo
+            title={`Done`}
+            description={`One more book down!`}
+            onDrop={this.onDrop}
+            onDragOver={this.onDragOver}
+          />
         </div>
       </div>
     );
