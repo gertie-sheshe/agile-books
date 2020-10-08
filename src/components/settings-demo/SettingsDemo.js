@@ -10,7 +10,7 @@ const SettingsDemo = ({ length }) => (
       <p>Author</p>
     </div>
     <div className="book-data">
-      <p>YOUR BOOKS</p>
+      <p className="book-text">YOUR BOOKS:</p>
       <div className="book-totals">
         <div>
           <p>TOTAL</p>
